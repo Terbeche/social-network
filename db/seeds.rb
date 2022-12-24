@@ -1,7 +1,7 @@
-# User.destroy_all
-# Group.destroy_all
-# Post.destroy_all
-# Comment.destroy_all
+#  Comment.destroy_all
+#  Post.destroy_all
+#  Group.destroy_all
+#  User.destroy_all
 
 @user1 = User.create(name:"user1", email:"user1@gmail.com", password:"123456", password_confirmation:"123456")
 @user2 = User.create(name:"user2", email:"user2@gmail.com", password:"123456", password_confirmation:"123456")
@@ -17,8 +17,21 @@ p "Created #{Group.count} groups"
 
 
 @post1 = Post.create(title:"First post", body:"First post content", user_id:@user1.id, group_id:@group1.id)
-@post2 = Post.create(title:"First post", body:"First post content", user_id:@user2.id, group_id:@group1.id)
-@post3 = Post.create(title:"First post", body:"First post content", user_id:@user3.id, group_id:@group1.id)
-@post4 = Post.create(title:"First post", body:"First post content", user_id:@user1.id, group_id:@group2.id)
+@post2 = Post.create(title:"Second post", body:"Second post content", user_id:@user2.id, group_id:@group1.id)
+@post3 = Post.create(title:"Third post", body:"Third post content", user_id:@user3.id, group_id:@group1.id)
+@post4 = Post.create(title:"Fourth post", body:"Fourth post content", user_id:@user1.id, group_id:@group2.id)
 
 p "Created #{Post.count} posts"
+
+
+@comment1 = Comment.create(text:"First comment", user_id:@user1.id, post_id:@group1.id)
+@comment2 = Comment.create(text:"Second comment", user_id:@user2.id, post_id:@group1.id)
+@comment3 = Comment.create(text:"Third comment", user_id:@user3.id, post_id:@group1.id)
+@comment4 = Comment.create(text:"Fourth comment", user_id:@user1.id, post_id:@group2.id)
+
+# @comment1 = Comment.create(text:"First comment")
+# @comment2 = Comment.create(text:"Second comment")
+# @comment3 = Comment.create(text:"Third comment")
+# @comment4 = Comment.create(text:"Fourth comment")
+
+p "Created #{Comment.count} comments"
