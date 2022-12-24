@@ -1,0 +1,2 @@
+  [1m[35m (2548.6ms)[0m  [1m[35mCREATE DATABASE "simplero_take_home_test_rails_development" ENCODING = 'unicode'[0m
+  [1m[35m (626.2ms)[0m  [1m[35mCREATE DATABASE "simplero_take_home_test_rails_test" ENCODING = 'unicode'[0m
