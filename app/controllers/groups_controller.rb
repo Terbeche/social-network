@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @members = group.users.all
+    @members = @group.users
   end
 
   def new
@@ -18,13 +18,31 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = current_user.groups.new(group_params)
-    if @recipe.save
-      redirect_to user_group_path(@group.user_id, @group.id)
-    else
-      render :new
-    end
+    @group = Group.new(group_params)
+    respond_to do |format|
+        format.html do
+          if @group.save
+            flash[:success] = 'Group created successfully'
+            redirect_to user_group_path(current_user, @group)
+          else
+            flash.now[:error] = 'Error: Group could not be created'
+            redirect_to new_user_group_path(current_user)
+          end
+        end
+      end
   end
+
+    respond_to do |format|
+      format.html do
+        if @post.save
+          flash[:success] = 'Post saved successfully'
+          redirect_to user_post_path(current_user, @post)
+        else
+          flash.now[:error] = 'Error: Post could not be saved'
+          redirect_to new_user_post_path(current_user)
+        end
+      end
+    end
 
   def destroy
     @group = Group.find params[:id]
