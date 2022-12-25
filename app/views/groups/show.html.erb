@@ -33,8 +33,11 @@
   <div class="ml-12">
     <h1> Members </h1>
     <div>
-      <% @group.users.each do |member| %>
+      <% @group.members.each do |member| %>
+        <div class="flex flex-row justify-start" data-controller="member">
+
           <%= render(MemberComponent.new(member: member, group: @group, current_user: current_user)) %> 
+      </div>
       <% end %>
     </div>
   </div>

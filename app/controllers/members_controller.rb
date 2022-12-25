@@ -6,6 +6,7 @@ class MembersController < ApplicationController
     @group = Group.find(params[:group_id])
     @member.group = @group
     @member.user = current_user
+    @member.name = current_user.name
     respond_to do |format|
       format.html do
         if @member.save
@@ -22,6 +23,7 @@ class MembersController < ApplicationController
     @group = group
     @member.group = @group
     @member.user = current_user
+    @member.name = current_user.name
     respond_to do |format|
       format.html do
         if @member.save
@@ -34,6 +36,17 @@ class MembersController < ApplicationController
   end
 
   def destroy
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+    puts "destroying member"
+
     @group = Group.find(params[:group_id])
     @member = Member.includes(:user, :group).find(params[:id])
     @member.delete
