@@ -1,25 +1,34 @@
 class GroupsController < ApplicationController
-  #  helper_method :join
+    helper_method :check_if_member
 
-    def join(group)
-      @member = Member.new()
-      puts group.name
-      puts current_user.name
-      @group = group
-      @user = current_user
-      @member.group = @group
-      @member.user = @user
-        
-      respond_to do |format|
-        format.html do
-          if @member.save
-            puts "member saved"
-          else
-            puts "member not saved"
-          end
-        end
+    # <% member_users_id = [] %>
+    # <% group.members.each do |member| %>
+    #     <% member_users_id.push(member.user_id) %>
+    # <%end %>
+
+
+    #   <% if current_user.id == group.user_id %>
+    #        <%= render 'own', {group: group, member: current_user} %>
+    #        <% break %>
+    #   <% end %>
+    #    <% if  member_users_id.include? current_user.id %>
+    #       <% member = Member.where("user_id = ? AND group_id = ?", current_user.id, group.id) %>
+    #        <%= render 'leave', {group: group, member: member} %>
+    #     <% else %>
+    #       <%= render 'join', group: group %>
+    #   <% end %>
+
+   def check_if_member(group)
+      @group = group 
+      @member = Member.where(user_id: current_user.id, group_id: @group.id).first
+      
+      if @member
+        return [true, @member]
+      else
+        return [false, @member]
       end
     end
+
 
     def index
         @groups = Group.all        
@@ -39,7 +48,10 @@ class GroupsController < ApplicationController
     end
 
     def create
+    
       @group = Group.new(group_params)
+  
+
       respond_to do |format|
           format.html do
             if @group.save
@@ -51,6 +63,10 @@ class GroupsController < ApplicationController
             end
           end
         end
+        membersController = MembersController.new
+        membersController.request = request
+        membersController.response = response
+        membersController.create_admin(@group)
     end
 
     respond_to do |format|

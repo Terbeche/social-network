@@ -1,0 +1,10 @@
+  <h1><%= @title %>:</h1>
+  <div><%= @body %></div>
+
+     <div>
+    <br>
+    <%= link_to  @title, user_group_post_path(@post.user_id, @group, @post)  %>
+    <br>
+    <p><%= @body %></p>
+    <br>
+    </div>

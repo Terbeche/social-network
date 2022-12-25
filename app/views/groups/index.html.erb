@@ -2,34 +2,13 @@
   <%= link_to "Sign In", new_user_session_path %>
   <%= link_to "Sign Up", new_user_registration_path %>
 <% end %>
-<div class="relative overflow-hidden bg-no-repeat bg-cover" style="background-position: 50%; background-image: url('https://mdbootstrap.com/img/new/textures/full/142.jpg'); height: 300px;"></div>
+  <div class="relative overflow-hidden bg-no-repeat bg-cover" style="background-position: 50%; background-image: url('https://mdbootstrap.com/img/new/textures/full/142.jpg'); height: 300px;"></div>
 <div class="flex flex-wrap mt-10 ">
   <% @groups.each do |group| %>
     <div class="block   w-full  lg:w-1/3">
-      <%= link_to user_group_path(group.user_id, group)  do %>
-        <div class="m-5 p-6 rounded-lg shadow-lg bg-white">
-          <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= group.name%></h5>
-        <%end%>
-                      </div>
-          <% member_users_id = [] %>
-          <% group.members.each do |member| %>
-              <% member_users_id.push(member.user_id) %>
-          <%end %>
-            <% if current_user.id == group.user_id %>
-                 <%= render 'own', {group: group, member: current_user} %>
-                 <% break %>
-            <% end %>
-             <% if  member_users_id.include? current_user.id %>
-                <% member = Member.where("user_id = ? AND group_id = ?", current_user.id, group.id) %>
-                 <%= render 'leave', {group: group, member: member} %>
-              <% else %>
-                <%= render 'join', group: group %>
-            <% end %>
-
-
-    
-
-     
+    <% group_membership = check_if_member(group)[0]%>
+    <% member = check_if_member(group)[1]%>
+    <%= render(GroupComponent.new(group: group, name: group.name, member: member, group_membership: group_membership, current_user: current_user)) %> 
     </div>
   <%end%>
 </div>

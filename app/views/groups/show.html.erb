@@ -31,11 +31,6 @@
 
 
 <% @posts.each do |post| %>
-    <div>
-    <br>
-    <%= link_to  post.title, user_group_post_path(post.user_id, @group, post)  %>
-    <br>
-    <p><%= post.body %></p>
-    <br>
-    </div>
+ <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group)) %>
+
 <% end %>
