@@ -1,6 +1,13 @@
 
-<div class="flex">
+<div class="flex" data-comment-target="commentBlock">
   <span><%= @username %>:</span>
   <span><%= @text %></span>
 
 </div>
+     <% if @current_user == @comment.user %>
+     <span data-comment-target="commentManipulationBlock">
+      <%= button_to 'edit', edit_user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :get, class: "justify-self-end	w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"%>
+     <span data-action="click->comment#delete"> <%= button_to 'delete', user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class: "justify-self-end w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      </span>
+     </span>
+      <%end%>

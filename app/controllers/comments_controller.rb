@@ -17,11 +17,9 @@ class CommentsController < ApplicationController
         if @comment.save
           puts 'comment saved'
           flash[:success] = 'Comment saved successfully'
-          redirect_to user_group_post_comments_path(current_user, @group, @post)
         else
           puts 'comment not saved'
           flash.now[:error] = 'Error: Comment could not be saved'
-          redirect_to new_user_group_post_comment_path(current_user)
         end
       end
     end
@@ -37,10 +35,6 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     if @comment.update(params.require(:comment).permit(:text))
-      puts 'comment updated'
-      puts 'comment updated'
-      puts 'comment updated'
-      puts 'comment updated'
       flash[:success] = 'Comment successfully updated!'
       @post = @comment.post
       @group = @post.group

@@ -28,7 +28,7 @@ class PostsController < ApplicationController
       format.html do
         if @post.save
           flash[:success] = 'Post saved successfully'
-          redirect_to user_group_posts_path(current_user, @group.id)
+          # redirect_to user_group_posts_path(current_user, @group.id)
         else
           flash.now[:error] = 'Error: Post could not be saved'
           redirect_to new_user_group_post_path(current_user)
@@ -62,7 +62,10 @@ class PostsController < ApplicationController
     @group = Group.find(params[:group_id])
     @group.save
     respond_to do |format|
-      format.html { redirect_to user_group_posts_path(current_user, @group.id) }
+      format.html do
+        flash[:success] = 'Post deleted successfully'
+
+      end
     end
   end
 

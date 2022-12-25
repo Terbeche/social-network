@@ -46,7 +46,10 @@
 <h1>  All Posts</h1>
 <div>
 <% @posts.each do |post| %>
- <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group)) %>
+  <div class="flex flex-row justify-start" data-controller="post">
+
+ <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group, current_user: current_user)) %>
+</div>
 <% end %>
 </div>
 </div>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :users, through: :members
 end
