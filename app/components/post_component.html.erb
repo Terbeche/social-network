@@ -1,9 +1,7 @@
-  <h1><%= @title %>:</h1>
-  <div><%= @body %></div>
-
      <div>
-    <br>
-    <%= link_to  @title, user_group_post_path(@post.user_id, @group, @post)  %>
+      <%= link_to user_group_post_path(@post.user_id, @group, @post)  do %>
+        <span class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @title %></span>
+    <%end%>
     <br>
     <p><%= @body %></p>
     <br>

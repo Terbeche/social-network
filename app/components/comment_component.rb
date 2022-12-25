@@ -5,5 +5,4 @@ class CommentComponent < ViewComponent::Base
     @username = username
     @text = text
   end
-
 end

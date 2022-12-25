@@ -11,6 +11,9 @@
   </head>
 
   <body>
+     <% if current_user %>
+      <%= render partial: "shared/navbar" %>
+    <%end%>
     <main class="container mx-auto mt-28 px-5 flex">
 
        <p class="notice"><%= notice %></p>
