@@ -1,0 +1,38 @@
+
+<h1>Here is a specific post for a given user<h1>
+<div>
+<span><%= @post.title  %></span><span> by </span><span><%= @post_owner.name  %></span>
+<p><%= @post.body %></p>
+</div>
+
+<% @post.comments.includes(:user).each do |comment| %>
+    <span><%= comment.user.name %>:</span>
+    <span><%= comment.text%></span>
+    <br>
+    <% if current_user == comment.user %>
+    <%= button_to 'edit', edit_user_group_post_comment_path(post_id: @post.id ,id: comment.id), :method => :get, class: "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"%>
+    <%= button_to 'delete', user_group_post_comment_path(post_id: @post.id ,id: comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class: "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    <%end%>
+<% end %>
+
+
+
+    <%= form_with model: @comment, url: user_group_post_comments_path(current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
+<div>
+    <div>
+    <%= f.text_field :text %>
+  </div>
+
+<div>
+  <%= f.submit "Add Comment" %>
+</div>
+</div>
+<% end %>
+
+
+<%if current_user == @post_owner %>
+<%=button_to 'Edit post', edit_user_group_post_path(current_user, @group, post_id: @post.id), :method => :get, class: "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+<%=button_to 'Delete post', user_group_post_path(post_id: @post.id), :method => :delete, data: { confirm: 'Are you sure?' },class: "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+
+<%end%>
+</div>

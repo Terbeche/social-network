@@ -1,0 +1,41 @@
+ <% if !current_user %>
+  <%= link_to "Sign In", new_user_session_path %>
+  <%= link_to "Sign Up", new_user_registration_path %>
+<% end %>
+
+
+<div>
+<h1>New Post</h1>
+    <%= form_with model: @post, url: user_group_posts_path(current_user.id, @group), method: :post,  local: true, scope: :post  do |f| %>
+<div>
+    <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div>
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+
+<div>
+  <%= f.submit "Add Post" %>
+</div>
+</div>
+<% end %>
+</div>
+
+
+<h1>  All Posts</h1>
+<div>
+
+
+<% @posts.each do |post| %>
+    <div>
+    <br>
+    <%= link_to  post.title, user_group_post_path(post.user_id, @group, post)  %>
+    <br>
+    <p><%= post.body %></p>
+    <br>
+    </div>
+<% end %>

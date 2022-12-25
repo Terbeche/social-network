@@ -1,0 +1,15 @@
+<div>
+<h1>Edit Comment</h1>
+
+<%= form_with model: @comment, url: user_group_post_comment_path(@comment), method: :patch, local: true do |f| %>
+<div>
+    <div>
+    <%= f.label :text %><br>
+    <%= f.text_field :text %>
+  </div>
+<div>
+  <%= f.submit "Save Changes" %>
+</div>
+</div>
+<% end %>
+</div>
