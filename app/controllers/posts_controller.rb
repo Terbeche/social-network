@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update(params.require(:post).permit(:title, :body))
       flash[:success] = 'Post item successfully updated!'
-      redirect_to user_group_post_path(@post)
+      # redirect_to user_group_post_path(@post)
     else
       flash.now[:error] = 'Post item update failed'
       render :edit

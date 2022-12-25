@@ -1,20 +1,51 @@
 <div class="flex" data-post-target="postBlock">
      
       <%= link_to user_group_post_path(@post.user_id, @group, @post)  do %>
-        <span class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @title %></span>
+        <span id="post-title-<%= @post.id%>" class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @title %></span>
     <%end%>
     <br>
-    <p><%= @body %></p>
+    <p id="post-body-<%= @post.id%>"><%= @body %></p>
     <br>
     </div>
 
   <%if @current_user.id == @post.user_id %>
        <span data-post-target="postManipulationBlock">
-
-  <%=button_to 'Edit post', edit_user_group_post_path(@current_user, @group, @post.id), :method => :get, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+<span id="edit-button-<%= @post.id%>">
+  <%=link_to 'Edit post', nil, remote: true , data: {controller: "post", action: "post#toggle_edit_form", target: "post.editButton", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+   </span>
     <span data-action="click->post#delete"> <%=button_to 'Delete post', user_group_post_path(@current_user.id, @group.id, @post.id), :method => :delete, data: { confirm: 'Are you sure?' },class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
      </span>
      </span>
+
+
+   <div id="edit-form-<%= @post.id%>" class="hidden	">
+  <div>
+<h1>Edit Post</h1>
+
+<%= form_with model: @post, data: {controller: "post"}, url: user_group_post_path(@current_user,@group, @post), method: :patch, local: true do |f| %>
+<div>
+    <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title  , data: {target: "post.title"}%>
+  </div>
+  
+  <div>
+    <%= f.label :body %><br>
+    <%= f.text_area :body , data: {target: "post.body" }%>
+  </div>
+
+<div>
+  <%= f.submit "Save Changes" , data: {action: "click->post#update", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}",  post_title_param: "post-title-#{@post.id}",  post_body_param: "post-body-#{@post.id}" } %>
+</div>
+</div>
+<% end %>
+</div>
+
+
+<div>
+
+
+
   <%end%>
 
 
