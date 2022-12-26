@@ -1,19 +1,14 @@
 <div class="flex" data-post-target="postBlock">
-     
-     
       <%= link_to user_group_post_path(@post.user_id, @group, @post)  do %>
         <span id="post-title-<%= @post.id%>" class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @title %></span>
     <%end%>
-
     <p id="post-body-<%= @post.id%>"><%= @body %></p>
-
 </div>
-
 
 
   <%if @current_user.id == @post.user_id %>
        <span data-post-target="postManipulationBlock">
-<span id="edit-button-<%= @post.id%>">
+      <span id="edit-button-<%= @post.id%>">
   <%=link_to 'Edit post', nil, remote: true , data: {controller: "post", action: "post#toggle_edit_form", target: "post.editButton", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
    </span>
     <span data-action="click->post#delete"> <%=button_to 'Delete post', user_group_post_path(@current_user.id, @group.id, @post.id), :method => :delete, data: { confirm: 'Are you sure?' },class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
@@ -23,28 +18,28 @@
 
    <div id="edit-form-<%= @post.id%>" class="hidden	">
 
-<h1>Edit Post</h1>
+    <h1>Edit Post</h1>
 
   <div class="m-8">
     <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">
       <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 lg:w-1/2 h-full mb-5 ">
 
 
-<%= form_with model: @post, data: {controller: "post"}, url: user_group_post_path(@current_user,@group, @post), method: :patch, local: true do |f| %>
-    <div>
-          <div class="relative ">
-          <%= f.label :title,  class: "leading-7 text-sm text-gray-400" %><br>
-          <%= f.text_field :title  , data: {target: "post.title"}, class: "form-control block w-full px-3 py-1.5 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%>
+    <%= form_with model: @post, data: {controller: "post"}, url: user_group_post_path(@current_user,@group, @post), method: :patch, local: true do |f| %>
+        <div>
+              <div class="relative ">
+              <%= f.label :title,  class: "leading-7 text-sm text-gray-400" %><br>
+              <%= f.text_field :title  , data: {target: "post.title"}, class: "form-control block w-full px-3 py-1.5 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%>
+            </div>
+              <div class="relative ">
+              <%= f.label :body,  class: "leading-7 text-sm text-gray-400" %><br>
+              <%= f.text_area :body , data: {target: "post.body" }, class: "form-control block w-full px-3 py-1.5 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%>
+            </div>
         </div>
-          <div class="relative ">
-          <%= f.label :body,  class: "leading-7 text-sm text-gray-400" %><br>
-          <%= f.text_area :body , data: {target: "post.body" }, class: "form-control block w-full px-3 py-1.5 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%>
+        <div class="actions flex justify-between">
+            <%= f.submit "Save Changes" , data: {action: "click->post#update", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}",  post_title_param: "post-title-#{@post.id}",  post_body_param: "post-body-#{@post.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         </div>
-    </div>
-    <div class="actions flex justify-between">
-        <%= f.submit "Save Changes" , data: {action: "click->post#update", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}",  post_title_param: "post-title-#{@post.id}",  post_body_param: "post-body-#{@post.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-    </div>
-<% end %>
+    <% end %>
 </div>
 
 </div>

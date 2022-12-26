@@ -29,7 +29,7 @@
         <%= f.text_field :text, data: {target: "comment.text"}%>
       </div>
       <div>
-        <%= f.submit data: {action: "click->comment#submit" } %>
+        <%= f.submit  "Add you comment", data: {action: "click->comment#submit" } %>
       </div>
     </div>
   <% end %>

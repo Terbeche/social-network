@@ -38,7 +38,6 @@ export default class extends Controller {
   }
 
   update (e) {
-    // e.preventDefault()
     e.stopPropagation()
     const new_title = this.titleTarget
     const new_body = this.bodyTarget

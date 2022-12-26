@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-    static targets = ["commentList", "text", "replyText", "commentBlock", "commentManipulationBlock"  ]
-    
+    static targets = ["commentList", "text", "replyText", "commentBlock", "commentManipulationBlock" ,"editButton" ]
+
   submit () {
     // e.preventDefault()
     console.log("submit")
@@ -25,6 +25,38 @@ export default class extends Controller {
     setTimeout(() => {
         element2.remove()
     }, 1)
+  }
+
+
+  toggle_edit_form (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    const formID = e.params["form"]
+    const form = document.getElementById(formID)
+    const buttonID = e.params["button"]
+    const button = document.getElementById(buttonID )
+    form.classList.toggle("hidden")
+    button.classList.add("hidden")
+    this.textTarget.focus()
+  }
+
+  update (e) {
+    e.stopPropagation()
+    const new_text = this.textTarget
+
+    const formID = e.params["form"]
+    const form = document.getElementById(formID)
+    const buttonID = e.params["button"]
+    const button = document.getElementById(buttonID )
+ 
+    form.classList.toggle("hidden")
+    button.classList.remove("hidden")
+   
+    const textID = e.params["text"]
+    const text = document.getElementById(textID)
+  
+    text.innerHTML = new_text.value
+ 
   }
 
   toggle_reply_form (e) {
