@@ -4,21 +4,21 @@
 
  <div class="flex flex-col">
      
-    <h1 class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @post.title %></h1>
+    <h1 class="text-gray-900 text-xl leading-tight font-medium mb-4">  <%= @post.title %></h1>
 
-    <p><%= @post.body %></p>
+    <p class="mb-12"><%= @post.body %></p>
  
  </div>
 
-<div id="comment-list" data-comment-target="commentList" class="flex flex-col">
+<div id="comment-list" data-comment-target="commentList" class="flex flex-col mb-12">
   <% @post.comments.includes(:user).each do |comment| %>
-<div class="flex flex-row justify-start" data-controller="comment">
+    <% unless comment.parent_id %>
 
-  <% unless comment.parent_id %>
+<div class="flex flex-row justify-start mb-12" data-controller="comment">
     <%= render(CommentComponent.new(username: comment.user.name, text: comment.text, current_user: current_user, group: @group, post: @post, comment: comment)) %>
-  <% end %>
+ 
   </div>
-
+ <% end %>
     <% end %>
 </div>
 
