@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-   @comment = Comment.new(comment_params)
+    @comment = Comment.new(comment_params)
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:post_id])
     respond_to do |format|
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def create_reply()
+  def create_reply
     @comment = Comment.new(comment_params)
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:post_id])
@@ -55,8 +55,8 @@ class CommentsController < ApplicationController
         end
       end
     end
-
   end
+
   def edit
     @comment = Comment.find(params[:id])
 

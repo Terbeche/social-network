@@ -64,7 +64,6 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:success] = 'Post deleted successfully'
-
       end
     end
   end

@@ -5,5 +5,4 @@ class ReplyComponent < ViewComponent::Base
     @username = username
     @text = text
   end
-
 end

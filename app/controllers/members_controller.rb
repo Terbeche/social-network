@@ -36,16 +36,16 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
-    puts "destroying member"
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
+    puts 'destroying member'
 
     @group = Group.find(params[:group_id])
     @member = Member.includes(:user, :group).find(params[:id])
