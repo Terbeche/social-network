@@ -74,19 +74,29 @@ export default class extends Controller {
     console.log("reply")
     e.stopPropagation()
     const element = this.replyTextTarget
+
+    const replyBlock = document.createElement("DIV");
+    const user = document.createElement("SPAN");
     const text = document.createElement("SPAN");
+    
+    user.innerHTML = e.params["user"].name + ": "
     text.innerHTML = element.value
-    text.classList.add("ml-4")
+    replyBlock.classList.add("ml-6")
     console.log(text)
+    console.log(user)
+    console.log(replyBlock)
+
     const formID = e.params["form"]
     const form = document.getElementById(formID)
     const buttonID = e.params["button"]
     const button = document.getElementById(buttonID )
     const blockID = e.params["block"]
-    const block = document.getElementById(blockID)
-    console.log(block)
+    const block = document.getElementById(blockID) 
     form.classList.toggle("hidden")
     button.classList.remove("hidden")
-    block.appendChild(text)
-  }
+    replyBlock.appendChild(user)
+    replyBlock.appendChild(text)
+    
+    block.parentElement.parentElement.appendChild(replyBlock)
+    }
 }

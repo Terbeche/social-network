@@ -7,16 +7,28 @@
      <% if @current_user == @comment.user || @current_user.id == @group.user_id  %>
      <span data-comment-target="commentManipulationBlock" class="flex">
 
-     <span id="edit-button-<%= @comment.id%>">
-  <%=link_to 'Edit', nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-   </span>
-
-            <span data-action="click->comment#delete"> <%= button_to 'delete', user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class: "justify-self-end w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+       
+  
+          <span id="edit-button-<%= @comment.id%>">
+            <%=button_to nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" },class:"btn btn-outline-primary" do %>
+              <i class="fa-solid fa-pen-to-square text-green-500 text-xl"> </i>
+            <% end %>
           </span>
-        
+
+
+          <span data-action="click->comment#delete">
+            <%= button_to user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-primary" do %>
+              <i class="fa-solid fa-trash text-red-500 text-xl"></i>
+            <% end %>
+          </span>
+      
           <%end%>
+
+       
           <span id="reply-button-<%= @comment.id%>">
-            <%=link_to "Reply", new_user_group_post_comment_path(@current_user.id, @group, @post, parent_id: @comment.id)  , remote: true , data: {controller: "comment", action: "comment#toggle_reply_form", target: "comment.replyButton", comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+            <%=button_to new_user_group_post_comment_path(@current_user.id, @group, @post, parent_id: @comment.id)  , remote: true , data: {controller: "comment", action: "comment#toggle_reply_form", target: "comment.replyButton", comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}" }, class:"btn btn-outline-primary"  do %>
+          <i class="fa-solid fa-reply text-blue-500 text-xl"></i>
+          <% end %>
           </span>
      </span>
 
@@ -72,7 +84,7 @@
               <%= f.text_field :text , data: {target: "comment.replyText"}%>
             </div>
             <div>
-              <%= f.submit "", data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" } %>
+              <%= f.submit "", data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" , comment_user_param: @current_user} %>
             </div>
           </div>
         <% end %>
