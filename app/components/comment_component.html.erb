@@ -81,7 +81,7 @@
             <%= f.hidden_field :parent_id, value: @comment.id %>
             </div>
             <div>
-              <%= f.text_field :text , data: {target: "comment.replyText"}%>
+              <%= f.text_field :text, value: "", data: {target: "comment.replyText"}%>
             </div>
             <div>
               <%= f.submit "", data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" , comment_user_param: @current_user} %>

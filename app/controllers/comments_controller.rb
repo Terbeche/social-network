@@ -30,6 +30,9 @@ class CommentsController < ApplicationController
         if @comment.save
           puts 'comment saved'
           flash[:success] = 'Comment saved successfully'
+          if !@comment.parent_id
+            redirect_to user_group_post_path(current_user, @group, @post)
+          end
         else
           puts 'comment not saved'
           flash.now[:error] = 'Error: Comment could not be saved'

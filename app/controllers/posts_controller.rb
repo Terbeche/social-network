@@ -28,7 +28,7 @@ class PostsController < ApplicationController
       format.html do
         if @post.save
           flash[:success] = 'Post saved successfully'
-          # redirect_to user_group_posts_path(current_user, @group.id)
+          redirect_to user_group_path(current_user, @group.id)
         else
           flash.now[:error] = 'Error: Post could not be saved'
           redirect_to new_user_group_post_path(current_user)
