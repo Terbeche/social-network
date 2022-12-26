@@ -1,0 +1,38 @@
+<div class="flex flex-col dark:bg-black dark:text-white">
+
+<div>
+
+ <div class="flex flex-col">
+     
+    <h1 class="dark:text-white text-gray-900 text-xl leading-tight font-medium mb-4">  <%= @post.title %></h1>
+
+    <p class="mb-12"><%= @post.body %></p>
+ 
+ </div>
+
+<div id="comment-list" data-comment-target="commentList" class="flex flex-col mb-12">
+  <% @post.comments.includes(:user).order("created_at DESC").each do |comment| %>
+    <% unless comment.parent_id %>
+
+<div class="flex flex-row justify-start mb-12" data-controller="comment">
+    <%= render(CommentComponent.new(username: comment.user.name, text: comment.text, current_user: current_user, group: @group, post: @post, comment: comment)) %>
+ 
+  </div>
+ <% end %>
+    <% end %>
+</div>
+
+<div class="dark:text-white text-black">
+  <%= form_with model: @comment, data: {controller: "comment"} ,url: user_group_post_comments_path(current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
+    <div>
+      <div>
+        <%= f.text_field :text, data: {target: "comment.text"}%>
+      </div>
+      <div>
+        <%= f.submit  "Add you comment", data: {action: "click->comment#submit" } %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>

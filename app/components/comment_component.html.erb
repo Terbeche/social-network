@@ -1,0 +1,103 @@
+<div class="flex flex-col">
+<div class="flex mb-2"> 
+    <div id="comment-block-<%= @comment.id%>" class="flex mr-4" data-comment-target="commentBlock">
+      <span class="mr-4"><%= @username %>:</span>
+      <span><%= @text %></span>
+    </div>
+     <% if @current_user == @comment.user || @current_user.id == @group.user_id  %>
+     <span data-comment-target="commentManipulationBlock" class="flex">
+
+       
+  
+          <span id="edit-button-<%= @comment.id%>">
+            <%=button_to nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" },class:"btn btn-outline-primary mr-6" do %>
+              <i class="fa-solid fa-pen-to-square text-green-500 text-xl"> </i>
+            <% end %>
+          </span>
+
+
+          <span data-action="click->comment#delete">
+            <%= button_to user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-primary mr-6" do %>
+              <i class="fa-solid fa-trash text-red-500 text-xl"></i>
+            <% end %>
+          </span>
+      
+          <%end%>
+
+       
+          <span id="reply-button-<%= @comment.id%>">
+            <%=button_to new_user_group_post_comment_path(@current_user.id, @group, @post, parent_id: @comment.id)  , remote: true , data: {controller: "comment", action: "comment#toggle_reply_form", target: "comment.replyButton", comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}" }, class:"btn btn-outline-primary"  do %>
+          <i class="fa-solid fa-reply text-blue-500 text-xl"></i>
+          <% end %>
+          </span>
+     </span>
+
+
+
+
+
+
+
+  <div id="edit-form-<%= @comment.id%>" class="hidden	">
+
+    <h1>Edit comment</h1>
+
+  <div class="m-8">
+    <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">
+      <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 lg:w-1/2 h-full mb-5 ">
+
+
+    <%= form_with model: @comment, data: {controller: "comment"}, url: user_group_post_comment_path(@current_user,@group, @post, @comment), method: :patch, local: true do |f| %>
+        <div>
+              <div class="relative ">
+              <%= f.label :text,  class: "leading-7 text-sm text-gray-400" %><br>
+              <%= f.text_field :text  , data: {target: "comment.text"}, class: "form-control block w-full px-3 py-1.5 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"%>
+            </div>
+  
+        </div>
+        <div class="actions flex justify-between">
+            <%= f.submit "Save comment" , data: {action: "click->comment#update", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}",  comment_title_param: "comment-title-#{@comment.id}",  comment_body_param: "comment-body-#{@comment.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+        </div>
+    <% end %>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+    <div id="reply-form-<%= @comment.id%>" class="hidden	">
+      <div>
+        <%= form_with model: @comment, data: {controller: "comment"} ,url: user_group_post_comments_path(@current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
+          <div>
+            <div>
+            <%= f.hidden_field :parent_id, value: @comment.id %>
+            </div>
+            <div>
+              <%= f.text_field :text, value: "", data: {target: "comment.replyText"}%>
+            </div>
+            <div>
+              <%= f.submit "", data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" , comment_user_param: @current_user} %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+</div>
+  
+      <div>
+      <% if @comment.replies.any? %>
+        <% @comment.replies.each do |reply| %> 
+            <%= render(ReplyComponent.new(text: reply.text, username: reply.user.name)) %>
+        <% end %>
+      <% end %>
+      </div>
+</div>

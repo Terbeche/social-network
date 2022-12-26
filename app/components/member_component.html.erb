@@ -1,0 +1,25 @@
+  <div class="flex" data-member-target="memberBlock">
+
+  <%= @member.name %>
+  </div>
+  <% if @group.user_id == @current_user.id %>
+
+    
+
+  <span data-member-target="memberManipulationBlock">
+
+
+    <span data-action="click->member#remove_member">
+    
+      <%= button_to user_group_member_path(@current_user.id, @group.id, @member.id),
+       :method => :delete, 
+       data: { confirm: 'Are you sure?' }, 
+        class:"btn btn-outline-primary ml-6" do %>
+        <i class="fa-solid fa-trash text-red-500 text-xl"></i>
+      <% end %>
+    
+    </span>
+  </span>
+
+<% end %>
+
