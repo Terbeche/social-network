@@ -59,6 +59,23 @@ class GroupsController < ApplicationController
       end
     end
   end
+  def edit
+    @group = Group.find(params[:id])
+
+    render :edit
+  end
+
+  def update
+    @group = Group.find(params[:id])
+    if @group.update(params.require(:group).permit(:name))
+      flash[:success] = 'Group successfully updated!'
+      redirect_to user_group_path(current_user, @group)
+
+    else
+      flash.now[:error] = 'Group update failed'
+      render :edit
+    end
+  end
 
   def destroy
     @group = Group.find params[:id]
