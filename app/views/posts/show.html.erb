@@ -14,8 +14,9 @@
   <% @post.comments.includes(:user).each do |comment| %>
 <div class="flex flex-row justify-start" data-controller="comment">
 
-  <%= render(CommentComponent.new(username: comment.user.name, text: comment.text, current_user: current_user, group: @group, post: @post, comment: comment)) %>
-
+  <% unless comment.parent_id %>
+    <%= render(CommentComponent.new(username: comment.user.name, text: comment.text, current_user: current_user, group: @group, post: @post, comment: comment)) %>
+  <% end %>
   </div>
 
     <% end %>

@@ -3,14 +3,26 @@
 class CommentsController < ApplicationController
   helper_method :create_reply
   def new
-    @comment = Comment.new
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+    puts 'new comment'
+
+    # @comment = Comment.new
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(parent_id: params[:parent_id])
     respond_to do |format|
       format.html { render :new, locals: { comment: @comment } }
     end
   end
 
   def create
-    @comment = Comment.new(comment_params)
+   @comment = Comment.new(comment_params)
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:post_id])
     respond_to do |format|
@@ -84,7 +96,7 @@ class CommentsController < ApplicationController
   def comment_params
     params
       .require(:comment)
-      .permit(:text)
-      .merge(user_id: params[:user_id], post_id: params[:post_id], parent_id: params[:parent_id])
+      .permit(:text, :parent_id)
+      .merge(user_id: params[:user_id], post_id: params[:post_id])
   end
 end

@@ -12,29 +12,37 @@
     
       <%end%>
   <span id="reply-button-<%= @comment.id%>">
-  <%=link_to 'Reply', nil, remote: true , data: {controller: "comment", action: "comment#toggle_reply_form", target: "comment.replyButton", comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  <%=link_to "Reply", new_user_group_post_comment_path(@current_user.id, @group, @post, parent_id: @comment.id)  , remote: true , data: {controller: "comment", action: "comment#toggle_reply_form", target: "comment.replyButton", comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}" }, class: "w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
    </span>
+
+
+
      </span>
 
    <div id="reply-form-<%= @comment.id%>" class="hidden	">
       <div>
+  
         <%= form_with model: @comment, data: {controller: "comment"} ,url: user_group_post_comments_path(@current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
           <div>
             <div>
-                <%= f.hidden_field :parent_id %>
+            <%= f.hidden_field :parent_id, value: @comment.id %>
             </div>
             <div>
-              <%= f.text_field :text, data: {target: "comment.replyText"}%>
+              <%= f.text_field :text , data: {target: "comment.replyText"}%>
             </div>
             <div>
-              <%= f.submit  data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" } %>
+              <%= f.submit "", data: {action: "click->comment#reply" , comment_form_param: "reply-form-#{@comment.id}", comment_button_param: "reply-button-#{@comment.id}",  comment_text_param: "comment-text-#{@comment.id}", comment_block_param:  "comment-block-#{@comment.id}" } %>
             </div>
           </div>
         <% end %>
       </div>
 </div>
+
+
+  
+
        <% if @comment.replies.any? %>
     <% @comment.replies.each do |reply| %> 
-  <%= render(ReplyComponent.new(text: @comment.text)) %>
+  <%= render(ReplyComponent.new(text: reply.text)) %>
     <% end %>
   <% end %>
