@@ -1,8 +1,8 @@
     <div data-controller="member" class="flex justify-between m-2 p-6 rounded-lg shadow-lg bg-white">
 
-    <%= link_to user_group_path(@group.user_id, @group)  do %>
-        <span class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @name %></span>
-    <%end%>
+    <%= render(LinkComponent.new(name: @name, link: user_group_path(@group.user_id, @group))) %> 
+
+ 
       <% if @group_membership %>
   <span data-action="click->member#change_membership"><%= button_to 'Leave', user_group_member_path(@current_user.id, @group.id, @member.id), :method => :delete, data: { confirm: 'Are you sure?', target: "member.groupMembership" }, class: "w-16 mr-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %></span>
     <% else %>

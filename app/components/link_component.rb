@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class LinkComponent < ViewComponent::Base
-  def initialize(link:, text:)
+  def initialize(link:, name:)
     @link = link
-    @text = text
+    @name = name
+    
   end
 end
