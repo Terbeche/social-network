@@ -38,7 +38,7 @@
 <button data-action="click->group#toggle_groups_category" class="w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Where I'm member</button>
 
 <div id="all-groups" data-group-target="allGroups" class="flex flex-wrap mt-10 ">
-  <% @groups.each do |group| %>
+  <% @groups.order("created_at DESC").each do |group| %>
     <div class="block   w-full  lg:w-1/3">
     <% group_membership = check_if_member(group)[0]%>
     <% member = check_if_member(group)[1]%>

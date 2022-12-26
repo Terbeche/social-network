@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
       format.html do
         if @group.save
           flash[:success] = 'Group created successfully'
-          redirect_to user_group_path(current_user, @group)
+          redirect_to user_groups_path(current_user)
         else
           flash.now[:error] = 'Error: Group could not be created'
           redirect_to new_user_group_path(current_user)
