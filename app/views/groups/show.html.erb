@@ -12,7 +12,7 @@
 <div class="flex">
   <div class="m-8">
     <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">
-      <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 lg:w-1/2 h-full mb-5 ">
+      <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 h-full mb-5 ">
         <h2 class="">Add New Post</h2>
       <%= form_with model: @post, url: user_group_posts_path(current_user.id, @group), method: :post,  local: true, scope: :post  do |form| %>
           <div class="relative ">

@@ -4,8 +4,7 @@
       <span class="mr-4"><%= @username %>:</span>
       <span><%= @text %></span>
     </div>
-
-     <% if @current_user == @comment.user %>
+     <% if @current_user == @comment.user || @current_user.id == @group.user_id  %>
      <span data-comment-target="commentManipulationBlock" class="flex">
 
      <span id="edit-button-<%= @comment.id%>">
