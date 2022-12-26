@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-#  Comment.destroy_all
-#  Post.destroy_all
-#  Group.destroy_all
-#  User.destroy_all
-
 @user1 = User.create(name: 'user1', email: 'user1@gmail.com', password: '123456', password_confirmation: '123456')
 @user2 = User.create(name: 'user2', email: 'user2@gmail.com', password: '123456', password_confirmation: '123456')
 @user3 = User.create(name: 'user3', email: 'user3@gmail.com', password: '123456', password_confirmation: '123456')
 @user4 = User.create(name: 'user4', email: 'user4@gmail.com', password: '123456', password_confirmation: '123456')
+@user5 = User.create(name: 'simplero', email: 'calvin@simplero.com', password: 'simplero',
+                     password_confirmation: 'simplero')
+@user6 = User.create(name: 'simplero', email: 'owais@simplero.com', password: 'simplero',
+                     password_confirmation: 'simplero')
+
 p "Created #{User.count} users"
 
 @group1 = Group.create(name: 'First group', user_id: @user1.id)
@@ -28,10 +28,5 @@ p "Created #{Post.count} posts"
 @comment2 = Comment.create(text: 'Second comment', user_id: @user2.id, post_id: @group1.id)
 @comment3 = Comment.create(text: 'Third comment', user_id: @user3.id, post_id: @group1.id)
 @comment4 = Comment.create(text: 'Fourth comment', user_id: @user1.id, post_id: @group2.id)
-
-# @comment1 = Comment.create(text:"First comment")
-# @comment2 = Comment.create(text:"Second comment")
-# @comment3 = Comment.create(text:"Third comment")
-# @comment4 = Comment.create(text:"Fourth comment")
 
 p "Created #{Comment.count} comments"

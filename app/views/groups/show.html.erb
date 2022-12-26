@@ -13,7 +13,7 @@
   <div class="m-8">
     <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">
       <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 h-full mb-5 ">
-        <h2 class="">Add New Post</h2>
+        <h2 class="dark:text-black">Add New Post</h2>
       <%= form_with model: @post, url: user_group_posts_path(current_user.id, @group), method: :post,  local: true, scope: :post  do |form| %>
           <div class="relative ">
             <%= form.label :title, class: "leading-7 text-sm text-gray-400" %>
@@ -36,7 +36,7 @@
 
 
   <div class="ml-12">
-    <h1> Members </h1>
+    <h1 class="mb-8 text-2xl" >Members</h1>
     <div>
       <% @group.members.each do |member| %>
         <div class="flex flex-row justify-start" data-controller="member">
@@ -49,11 +49,11 @@
 
 
   <div class="ml-12">
-    <h1>  All Posts</h1>
+    <h1 class="mb-12 text-2xl" >  All Posts</h1>
 
-    <% @posts.each do |post| %>
+    <% @posts.order("created_at DESC").each do |post| %>
      
-      <div class="flex flex-row justify-start" data-controller="post">
+      <div class="flex flex-row justify-start mb-6" data-controller="post">
         <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group, current_user: current_user)) %>
       </div>
     <% end %>

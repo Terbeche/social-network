@@ -1,20 +1,20 @@
 <div data-post-target="postBlock">
       <%= link_to user_group_post_path(@post.user_id, @group, @post)  do %>
-        <span id="post-title-<%= @post.id%>" class="text-gray-900 text-xl leading-tight font-medium mb-2">  <%= @title %></span>
+        <span id="post-title-<%= @post.id%>" class="dark:text-white text-gray-900 text-xl leading-tight font-medium ">  <%= @title %></span>
     <%end%>
-    <p id="post-body-<%= @post.id%>"><%= @body %></p>
+    <p id="post-body-<%= @post.id%>" class="mt-4"> <%= @body %></p>
 </div>
 
 
   <%if @current_user.id == @post.user_id || @current_user.id == @group.user_id %>
         <span data-post-target="postManipulationBlock" class="flex justify-items-end">
           <span id="edit-button-<%= @post.id%>">          
-            <%= button_to  nil, remote: true , data: {controller: "post", action: "post#toggle_edit_form", target: "post.editButton", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}" } do %>
+            <%= button_to  nil, remote: true , data: {controller: "post", action: "post#toggle_edit_form", target: "post.editButton", post_form_param: "edit-form-#{@post.id}", post_button_param: "edit-button-#{@post.id}" },class:"btn btn-outline-primary ml-6" do %>
                 <i class="fa-solid fa-pen-to-square text-green-500 text-xl"> </i>
             <% end %>
           </span>
           <span data-action="click->post#delete"> 
-            <%= button_to  user_group_post_path(@current_user.id, @group.id, @post.id), :method => :delete, data: { confirm: 'Are you sure?' },class:"btn btn-outline-primary" do %>
+            <%= button_to  user_group_post_path(@current_user.id, @group.id, @post.id), :method => :delete, data: { confirm: 'Are you sure?' },class:"btn btn-outline-primary ml-6" do %>
                 <i class="fa-solid fa-trash text-red-500 text-xl"></i>
             <% end %>
           </span>
@@ -22,8 +22,6 @@
 
 
    <div id="edit-form-<%= @post.id%>" class="hidden	">
-
-    <h1>Edit Post</h1>
 
   <div class="m-8">
     <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">

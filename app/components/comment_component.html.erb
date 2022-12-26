@@ -10,14 +10,14 @@
        
   
           <span id="edit-button-<%= @comment.id%>">
-            <%=button_to nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" },class:"btn btn-outline-primary" do %>
+            <%=button_to nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" },class:"btn btn-outline-primary mr-6" do %>
               <i class="fa-solid fa-pen-to-square text-green-500 text-xl"> </i>
             <% end %>
           </span>
 
 
           <span data-action="click->comment#delete">
-            <%= button_to user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-primary" do %>
+            <%= button_to user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-primary mr-6" do %>
               <i class="fa-solid fa-trash text-red-500 text-xl"></i>
             <% end %>
           </span>
