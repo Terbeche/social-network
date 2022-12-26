@@ -4,13 +4,7 @@ export default class extends Controller {
 
     static targets = ["groupMembership" , "memberBlock", "memberManipulationBlock" ]
 
-    connect() { 
-        console.log("Hello, remove!", this.element)
-    }
-    
-
   change_membership (e) {  
-    console.log("changing membership")
     const element = this.groupMembershipTarget
     const text = element.innerHTML
 
@@ -22,7 +16,6 @@ export default class extends Controller {
 }
 
 remove_member (e) {
-    console.log("removing member")
     const element1 = this.memberBlockTarget
     const element2 = this.memberManipulationBlockTarget
     console.log(element1)

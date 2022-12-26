@@ -4,9 +4,6 @@ export default class extends Controller {
 
     static targets = ["postList", "title", "body", "postBlock", "postManipulationBlock", "editButton"  ]
 
-    connect() { 
-        console.log("Hello, edit!", this.element)
-    }
     
 //   submit () {
 //     console.log("submit")
@@ -18,13 +15,10 @@ export default class extends Controller {
 //   }
 
   delete (e) {  
-    console.log("delete")
     const element1 = this.postBlockTarget
     const element2 = this.postManipulationBlockTarget
     const text = element1
-    console.log(text)
     const text2 = element2
-    console.log(text2)
     element1.remove()
     setTimeout(() => {
         element2.remove()

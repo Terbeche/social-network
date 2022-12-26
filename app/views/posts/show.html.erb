@@ -10,7 +10,7 @@
  
  </div>
 
-<div data-comment-target="commentList" class="flex flex-col">
+<div id="comment-list" data-comment-target="commentList" class="flex flex-col">
   <% @post.comments.includes(:user).each do |comment| %>
 <div class="flex flex-row justify-start" data-controller="comment">
 

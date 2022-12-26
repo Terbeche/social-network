@@ -3,22 +3,6 @@
 class GroupsController < ApplicationController
   helper_method :check_if_member
 
-  # <% member_users_id = [] %>
-  # <% group.members.each do |member| %>
-  #     <% member_users_id.push(member.user_id) %>
-  # <%end %>
-
-  #   <% if current_user.id == group.user_id %>
-  #        <%= render 'own', {group: group, member: current_user} %>
-  #        <% break %>
-  #   <% end %>
-  #    <% if  member_users_id.include? current_user.id %>
-  #       <% member = Member.where("user_id = ? AND group_id = ?", current_user.id, group.id) %>
-  #        <%= render 'leave', {group: group, member: member} %>
-  #     <% else %>
-  #       <%= render 'join', group: group %>
-  #   <% end %>
-
   def check_if_member(group)
     @group = group
     @member = Member.where(user_id: current_user.id, group_id: @group.id).first
