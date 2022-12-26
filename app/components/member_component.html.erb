@@ -5,8 +5,8 @@
   <% if @group.user_id == @current_user.id %>
   <span data-member-target="memberManipulationBlock">
     <span data-action="click->member#remove_member">  <%= button_to 'Remove', user_group_member_path(@current_user.id, @group.id, @member.id), :method => :delete, data: { confirm: 'Are you sure?' }, class: "w-16 mr-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-</span>
-</span>
+    </span>
+  </span>
 
 <% end %>
 

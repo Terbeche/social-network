@@ -3,9 +3,13 @@
   <%= link_to "Sign Up", new_user_registration_path %>
 <% end %>
 
+
+    <% group_membership = check_if_member(@group)[0]%>
+    <% member = check_if_member(@group)[1]%>
+    <% if group_membership %>
+   
 <div class="flex flex-col">
 <div class="flex">
-
   <div class="m-8">
     <div class="min-w-screen flex pt-1 justify-center font-sans overflow-hidden">
       <div class="block rounded-lg shadow-lg bg-white px-6 py-8 md:px-12 lg:w-1/2 h-full mb-5 ">
@@ -30,31 +34,36 @@
     <% end %>
   </div>
 
+
   <div class="ml-12">
     <h1> Members </h1>
     <div>
       <% @group.members.each do |member| %>
         <div class="flex flex-row justify-start" data-controller="member">
-
           <%= render(MemberComponent.new(member: member, group: @group, current_user: current_user)) %> 
       </div>
       <% end %>
     </div>
   </div>
-
 </div>
 
 
-<div class="block ml-12">
-<h1>  All Posts</h1>
-<div>
-<% @posts.each do |post| %>
-  <div class="flex flex-row justify-start" data-controller="post">
+  <div class="ml-12">
+    <h1>  All Posts</h1>
 
- <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group, current_user: current_user)) %>
+    <% @posts.each do |post| %>
+     
+      <div class="flex flex-row justify-start" data-controller="post">
+        <%= render(PostComponent.new(title: post.title, body: post.body, post: post, group: @group, current_user: current_user)) %>
+      </div>
+    <% end %>
+  </div>
+
 </div>
+
+   
+  <% else %>
+       <h1>You are not member of this group</h1>
 <% end %>
-</div>
-</div>
 
-</div>
+
