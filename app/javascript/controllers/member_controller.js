@@ -18,8 +18,6 @@ export default class extends Controller {
 remove_member (e) {
     const element1 = this.memberBlockTarget
     const element2 = this.memberManipulationBlockTarget
-    console.log(element1)
-    console.log(element2)
     
     element1.remove()
     setTimeout(() => {

@@ -22,13 +22,13 @@
     <% end %>
 </div>
 
-<div class="dark:text-white text-black">
+<div class="dark:text-black text-black">
   <%= form_with model: @comment, data: {controller: "comment"} ,url: user_group_post_comments_path(current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
     <div>
       <div>
         <%= f.text_field :text, data: {target: "comment.text"}%>
       </div>
-      <div>
+      <div class="dark:text-white">
         <%= f.submit  "Add you comment", data: {action: "click->comment#submit" } %>
       </div>
     </div>

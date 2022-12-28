@@ -4,15 +4,6 @@ export default class extends Controller {
 
     static targets = ["postList", "title", "body", "postBlock", "postManipulationBlock", "editButton"  ]
 
-    
-//   submit () {
-//     console.log("submit")
-//     const element = this.textTarget
-//     const text = element.value
-//     console.log(this.commentListTarget.innerHTML)
-//     this.commentListTarget.innerHTML = text + this.commentListTarget.innerHTML
-//     this.textTarget.value = ''
-//   }
 
   delete (e) {  
     const element1 = this.postBlockTarget

@@ -5,11 +5,8 @@ export default class extends Controller {
     static targets = ["commentList", "text", "replyText", "commentBlock", "commentManipulationBlock" ,"editButton" ]
 
   submit () {
-    // e.preventDefault()
-    console.log("submit")
     const element = this.textTarget
     const text = element.value
-    console.log(this.commentListTarget.innerHTML)
     this.commentListTarget.innerHTML = text + this.commentListTarget.innerHTML
     this.textTarget.value = ''
   }
@@ -18,9 +15,7 @@ export default class extends Controller {
     const element1 = this.commentBlockTarget
     const element2 = this.commentManipulationBlockTarget
     const text = element1
-    console.log(text)
     const text2 = element2
-    console.log(text2)
     element1.remove()
     setTimeout(() => {
         element2.remove()
@@ -71,7 +66,6 @@ export default class extends Controller {
   }
 
   reply (e) {
-    console.log("reply")
     e.stopPropagation()
     const element = this.replyTextTarget
 
@@ -82,9 +76,7 @@ export default class extends Controller {
     user.innerHTML = e.params["user"].name + ": "
     text.innerHTML = element.value
     replyBlock.classList.add("ml-6")
-    console.log(text)
-    console.log(user)
-    console.log(replyBlock)
+
 
     const formID = e.params["form"]
     const form = document.getElementById(formID)

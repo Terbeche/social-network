@@ -5,17 +5,12 @@
       <span><%= @text %></span>
     </div>
      <% if @current_user == @comment.user || @current_user.id == @group.user_id  %>
-     <span data-comment-target="commentManipulationBlock" class="flex">
-
-       
-  
+     <span data-comment-target="commentManipulationBlock" class="flex">  
           <span id="edit-button-<%= @comment.id%>">
             <%=button_to nil, remote: true , data: {controller: "comment", action: "comment#toggle_edit_form", target: "comment.editButton", comment_form_param: "edit-form-#{@comment.id}", comment_button_param: "edit-button-#{@comment.id}" },class:"btn btn-outline-primary mr-6" do %>
               <i class="fa-solid fa-pen-to-square text-green-500 text-xl"> </i>
             <% end %>
           </span>
-
-
           <span data-action="click->comment#delete">
             <%= button_to user_group_post_comment_path(post_id: @post.id ,id: @comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-primary mr-6" do %>
               <i class="fa-solid fa-trash text-red-500 text-xl"></i>
@@ -73,7 +68,7 @@
 
 
 
-    <div id="reply-form-<%= @comment.id%>" class="hidden	">
+    <div id="reply-form-<%= @comment.id%>" class="hidden dark:text-black text-black">
       <div>
         <%= form_with model: @comment, data: {controller: "comment"} ,url: user_group_post_comments_path(@current_user.id, @group, @post), method: :post,  local: true, scope: :comment  do |f| %>
           <div>

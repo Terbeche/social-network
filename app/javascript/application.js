@@ -6,8 +6,6 @@ import "controllers"
 const userTheme = localStorage.getItem("theme")
 
 const theme_check =() => {
-    console.log("theme_check")
-    console.log(userTheme)
     if (userTheme == "dark") {
             document.body.classList.add("dark");
     }
