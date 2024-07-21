@@ -4,10 +4,10 @@
 @user2 = User.create(name: 'user2', email: 'user2@gmail.com', password: '123456', password_confirmation: '123456')
 @user3 = User.create(name: 'user3', email: 'user3@gmail.com', password: '123456', password_confirmation: '123456')
 @user4 = User.create(name: 'user4', email: 'user4@gmail.com', password: '123456', password_confirmation: '123456')
-@user5 = User.create(name: 'simplero', email: 'calvin@simplero.com', password: 'simplero',
-                     password_confirmation: 'simplero')
-@user6 = User.create(name: 'simplero', email: 'owais@simplero.com', password: 'simplero',
-                     password_confirmation: 'simplero')
+# @user5 = User.create(name: 'simplero', email: 'calvin@simplero.com', password: 'simplero',
+#                      password_confirmation: 'simplero')
+# @user6 = User.create(name: 'simplero', email: 'owais@simplero.com', password: 'simplero',
+#                      password_confirmation: 'simplero')
 
 p "Created #{User.count} users"
 
